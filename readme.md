@@ -1,20 +1,68 @@
-Post api res:- http://localhost:4000/api/job
+# Asynchronous Document Processing API System
+
+## Running the Server
+
+Start the server using:
+
+```
+npx nodemon Server.js
+```
+
+### Console Output
+
+```
+Server running on port 4000
+Worker started for job: df5e2d64-a066-4b6a-a340-fd6f1eddbdb1
+Worker started for job: 36e705e2-d760-4847-b91f-dc7c4cdf83e3
+Worker started for job: 7001e961-4ae4-4503-8201-c826c15ffbf5
+Worker started for job: ffad8c13-f525-43c9-8fc2-f29e35235d5b
+```
+
+---
+
+## API Testing
+
+### Create Job
+
+**POST**  
+http://localhost:4000/api/job
+
+**Response**
+
+```
 {
   "message": "Job created",
   "jobId": "ffad8c13-f525-43c9-8fc2-f29e35235d5b"
 }
+```
 
-Get api res:- http://localhost:4000/api/job/ffad8c13-f525-43c9-8fc2-f29e35235d5b
+---
 
-1st:
+### Get Job Status
+
+**GET**  
+http://localhost:4000/api/job/ffad8c13-f525-43c9-8fc2-f29e35235d5b
+
+---
+
+## Job Lifecycle Responses
+
+### 1. Queued State
+
+```
 {
   "id": "ffad8c13-f525-43c9-8fc2-f29e35235d5b",
   "fileUrl": "https://example.com/rhha.pdf",
   "status": "queued",
   "createdAt": "2026-03-29T13:16:37.191Z"
 }
+```
 
-2nd 
+---
+
+### 2. Processing State
+
+```
 {
   "id": "ffad8c13-f525-43c9-8fc2-f29e35235d5b",
   "fileUrl": "https://example.com/rh.pdf",
@@ -22,8 +70,13 @@ Get api res:- http://localhost:4000/api/job/ffad8c13-f525-43c9-8fc2-f29e35235d5b
   "createdAt": "2026-03-29T13:14:53.978Z",
   "startedAt": "2026-03-29T13:15:22.731Z"
 }
+```
 
-3rd
+---
+
+### 3. Completed State
+
+```
 {
   "id": "ffad8c13-f525-43c9-8fc2-f29e35235d5b",
   "fileUrl": "https://example.com/rh.pdf",
@@ -36,20 +89,9 @@ Get api res:- http://localhost:4000/api/job/ffad8c13-f525-43c9-8fc2-f29e35235d5b
     "wordCount": 120
   }
 }
-
-when server runs in console output:-
-Server running on port 4000
-Worker started for job: df5e2d64-a066-4b6a-a340-fd6f1eddbdb1
-Worker started for job: 36e705e2-d760-4847-b91f-dc7c4cdf83e3
-Worker started for job: 7001e961-4ae4-4503-8201-c826c15ffbf5
-Worker started for job: ffad8c13-f525-43c9-8fc2-f29e35235d5b
-Worker started for job: 1b8c0c6e-319d-4fc3-9ab2-343d31832d87
-Worker started for job: 9cd81536-5446-4399-99ad-087c330ce42f
-Worker started for job: 3ae4d79c-1543-4abb-8194-6c5ce240ebfb
-Worker started for job: b2567d2a-1a43-4e0d-9c76-c758e15049d6
+```
 
 
-# Asynchronous Document Processing API System
 
 ## Overview
 
@@ -143,17 +185,7 @@ The system can be extended with:
 - No authentication or authorization
 - Mock processing instead of real document parsing
 
----
 
-## Future Improvements
-
-- Replace in-memory store with database
-- Add authentication (JWT)
-- Integrate file upload handling
-- Add monitoring dashboard for jobs
-- Deploy using Docker and cloud services
-
----
 
 ## Author
 
